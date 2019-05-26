@@ -3,7 +3,6 @@ package com.ews.api.webfluxdemo.controller;
 import com.ews.api.webfluxdemo.model.Payment;
 import com.ews.api.webfluxdemo.repository.PaymentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cloud.netflix.hystrix.HystrixCommands;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -37,13 +36,9 @@ public class PaymentController extends AbstractCrudController<Payment> {
         return Flux.zip(interval, this.repository.findAll());
     }
 
-    @GetMapping(path = "/circuit-breaker-error-test")
-    public Mono<String> circuitBreakTest(){
-        return HystrixCommands
-                .from(Mono.just(this.restTemplate.getForObject("http://noUrl.com", String.class)))
-                .fallback(Mono.just("API is not working, tray again latter..."))
-                .commandName("count")
-                .toMono();
+    @GetMapping(path = "/test")
+    public Mono<String> test(){
+        return Mono.just("XABARACUNAIA!");
     }
 
 }
