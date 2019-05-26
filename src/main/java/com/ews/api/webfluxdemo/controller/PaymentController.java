@@ -35,10 +35,5 @@ public class PaymentController extends AbstractCrudController<Payment> {
         Flux<Long> interval = Flux.interval(Duration.ofSeconds(1));
         return Flux.zip(interval, this.repository.findAll());
     }
-
-    @GetMapping(path = "/test")
-    public Mono<String> test(){
-        return Mono.just("XABARACUNAIA!");
-    }
-
+    
 }
