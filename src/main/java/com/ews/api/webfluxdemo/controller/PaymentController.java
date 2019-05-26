@@ -35,5 +35,5 @@ public class PaymentController extends AbstractCrudController<Payment> {
         Flux<Long> interval = Flux.interval(Duration.ofSeconds(1));
         return Flux.zip(interval, this.repository.findAll());
     }
-    
+
 }
